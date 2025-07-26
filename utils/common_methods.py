@@ -132,3 +132,16 @@ class Common_methods:
         project = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "body > app-root > app-layout > app-dashboard > main > section > div > div > div > div.row.bg-theme-white.p-3.mb-3 > div.col-12.row.px-0.flex-nowrap.overflow-hidden > owl-carousel-o > div > div.owl-stage-outer.ng-star-inserted > owl-stage > div > div > div:nth-child(1) > a > div > div > div.work-card-body.add-new > div > img")))
         ActionChains(self.driver).double_click(project).perform()
         time.sleep(9)
+
+    def logo(self):
+        logo = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "body > app-root > app-layout > app-project > app-header-layout > header > nav > div > div > div.col.d-flex.align-items-center.px-2.ms-1 > a > img")))  
+        logo.click()
+        time.sleep(2)
+
+    def logout(self):
+        header_dropdown = self.driver.find_element(By.CSS_SELECTOR, ".header-dropdown > .h-100")
+        header_dropdown.click()
+        dropdown_option = self.driver.find_element(By.CSS_SELECTOR, "a.d-flex")
+        actions = ActionChains(self.driver)
+        actions.move_to_element(dropdown_option).click().perform()
+        time.sleep(3)

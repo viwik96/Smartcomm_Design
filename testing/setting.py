@@ -328,3 +328,6 @@ class Test_settingpage:
         logout = self.wait.until(EC.element_to_be_clickable((By.ID, "delete")))
         logout.click()
         time.sleep(2)
+
+
+        

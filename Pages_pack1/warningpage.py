@@ -7,7 +7,7 @@ from utils.common_methods import Common_methods
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-class sldscreentest:
+class warnings:
 
     def __init__(self, driver):
         self.driver = driver
@@ -193,3 +193,124 @@ class sldscreentest:
             except Exception as e:
                 print(f"Error during deletion: {e}")
                 break
+
+
+
+    def sld_framed1_component(self):
+
+        actions = ActionChains(self.driver)
+
+        """ view= self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#LK_Expand")))
+        view.click() """
+
+        # Hover on LV Substation
+        lv_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
+        actions.move_to_element(lv_icon).perform()
+        time.sleep(1)
+
+        component = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#sld_menu_section > div > div:nth-child(1) > ul > li:nth-child(1) > ul > li:nth-child(1) > a > span")))
+        actions.move_to_element(component).perform()
+
+        # Click LV Substation image
+        lv_image = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#LV_Substation")))
+        actions.click(lv_image).perform()
+
+
+        # Click on parent layout
+        layout = self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout")))
+        pyautogui.moveTo(400, 190)
+        layout.click()
+        time.sleep(4)
+
+
+        # Hover on Distribution Busbar
+        db_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(2) > #navbarDropdownMenuLink > .theme-svg")))
+        actions.move_to_element(db_icon).perform()
+        time.sleep(1)
+
+        busbar = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#sld_menu_section > div > div:nth-child(1) > ul > li:nth-child(2) > ul > li:nth-child(1) > a > span")))
+        actions.move_to_element(busbar).perform()
+
+        # Click Distribution Busbar image
+        db_image = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#LK_DistributionBusbar")))
+        actions.click(db_image).perform()
+
+        # Move to position (420, 195) on screen (mock for .realMouseMove)
+        pyautogui.moveTo(420, 195)
+        time.sleep(1)
+        layout.click()
+        time.sleep(3)
+
+
+        # Hover on Generic Load
+        gl_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(5) > #navbarDropdownMenuLink > .theme-svg")))
+        actions.move_to_element(gl_icon).perform()
+        time.sleep(2)
+
+        load = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#sld_menu_section > div > div:nth-child(1) > ul > li:nth-child(5) > ul > li:nth-child(1) > a > span")))
+        actions.move_to_element(load).perform()
+
+        # Click Generic Load image
+        gl_image = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#LK_GenericLoad")))
+        actions.click(gl_image).perform()
+
+        # Move Generic Load to (215, 200) using pyautogui
+        pyautogui.moveTo(300, 250)
+        time.sleep(1)
+        layout.click()
+
+
+
+    def warning_scenario_3(self):
+
+        actions = ActionChains(self.driver)
+
+        # Step 1: Hover on "LV Substation"
+        lv_substation_icon = self.wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ':nth-child(1) > #navbarDropdownMenuLink > .theme-svg')
+        ))
+        actions.move_to_element(lv_substation_icon).perform()
+        time.sleep(4)
+
+        lv_substation_option = self.wait.until(EC.visibility_of_element_located(
+            (By.XPATH, "//span[text()='LV Substation']")
+        ))
+        actions.move_to_element(lv_substation_option).click().perform()
+
+        self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout"))).click()
+        time.sleep(4)
+
+        # Step 2: Hover on "Distribution Busbar"
+        distribution_busbar_icon = self.wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ':nth-child(2) > #navbarDropdownMenuLink > .theme-svg')
+        ))
+        actions.move_to_element(distribution_busbar_icon).perform()
+
+        distribution_busbar_option = self.wait.until(EC.visibility_of_element_located(
+            (By.XPATH, "//span[text()='Distribution Busbar']")
+        ))
+        actions.move_to_element(distribution_busbar_option).click().perform()
+
+        # Simulate drawing on canvas (LK_DistributionBusbar)
+        canvas = self.wait.until(EC.presence_of_element_located((By.ID, "LK_DistributionBusbar")))
+        actions.move_to_element_with_offset(canvas, 420, 195).click().perform()
+        self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout"))).click()
+        time.sleep(3)
+
+        # Step 3: Hover on "Generic Load"
+        generic_load_icon = self.wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ':nth-child(5) > #navbarDropdownMenuLink > .theme-svg')
+        ))
+        actions.move_to_element(generic_load_icon).perform()
+        time.sleep(2)
+
+        generic_load_option = self.wait.until(EC.visibility_of_element_located(
+            (By.XPATH, "//span[text()='Generic Load']")
+        ))
+        actions.move_to_element(generic_load_option).click().perform()
+
+        canvas_load = self.wait.until(EC.presence_of_element_located((By.ID, "LK_GenericLoad")))
+        actions.move_to_element_with_offset(canvas_load, 220, 200).click().perform()
+
+        self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout"))).click()
+        time.sleep(5)

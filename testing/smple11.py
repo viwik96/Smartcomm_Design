@@ -30,51 +30,49 @@ class Test_sldscreenpage:
             time.sleep(40)
 
 
-    def test_scd_tc_144(self):
+    def test_warning_tc_18(self):
 
         comm = Common_methods(self.driver)
-        comm.test_sample1()
-        comm.test_proclick()
-
         Warning = warnings(self.driver)
-        Warning.warning_scenario_4()
-        actions = ActionChains(self.driver)
 
-        # Step 2: Click feeder circuit
-        parent = self.driver.find_element(By.ID, "parent-layout")
-        feeder = parent.find_element(By.ID, "fdr-circuit-bbt-3-label-0")
-        actions.move_to_element(feeder).click().perform()
+        try:
+            # Step 1: Click project and go to Motor1 screen
+            comm.test_sample1()
+            comm.test_proclick()
+            Warning.motor1()
 
-        # Step 3: Set protection type to index 1 (Fuse)
-        Select(self.driver.find_element(By.ID, "protection-type")).select_by_index(1)
-        time.sleep(2)
+            # Step 2: Click on LV Source label
+            parent = self.driver.find_element(By.ID, "parent-layout")
+            lv_source = parent.find_element(By.ID, "lv-source-1-label-1")
+            ActionChains(self.driver).move_to_element(lv_source).click().perform()
 
-        # Step 4: Click gear icon and then submit
-        self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
-        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".pt-4 > div > .btn"))).click()
-        time.sleep(15)
+            # Step 3: Select UN dropdown (index 7)
+            Select(self.driver.find_element(By.ID, "un")).select_by_index(7)
+            time.sleep(2)
 
-        # Step 5: Click LV Source
-        lv_source = parent.find_element(By.ID, "lv-source-1-label-1")
-        actions.move_to_element(lv_source).click().perform()
+            # Step 4: Click gear icon and submit
+            self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+            self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+            time.sleep(13)
 
-        # Step 6: Select UN as index 9
-        Select(self.driver.find_element(By.ID, "un")).select_by_index(9)
+            # Step 5: Click report button
+            self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
 
-        # Step 7: Click gear icon and submit
-        self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
-        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".pt-4 > div > .btn"))).click()
-        time.sleep(5)
+            # Step 6: Capture and validate error message
+            msg_elem = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".fs-12")))
+            actual_msg = msg_elem.text.strip()
+            expected_msg = (
+                "Type-2 Coordination chart is available for 415V & 433V. "
+                "For other voltage requirements, please contact customer interaction centre"
+            )
 
-        # Step 8: Open report
-        self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
+            print("Validation Message:", actual_msg)
+            assert actual_msg == expected_msg, f"Expected: {expected_msg}, Got: {actual_msg}"
 
-        # Step 9: Capture and assert the warning message
-        msg_elem = self.wait.until(EC.visibility_of_element_located((
-            By.CSS_SELECTOR, "#panelsStayOpen-errorOne-1 > div > div > div:nth-child(3) > span"
-        )))
-        actual_msg = msg_elem.text.strip()
-        expected_msg = "Fuses are available upto 415V. For higher system voltage, Please change the Fuse to Circuit breaker"
+        except Exception as e:
+            print(f"[Test Failed] Reason: {e}")
+            self.driver.save_screenshot("test_warning_tc_18_failed.png")
+            raise
 
-        print("Validation Message:", actual_msg)
-        assert actual_msg == expected_msg, f"Expected: {expected_msg}, Got: {actual_msg}"
+        finally:
+            comm.logo()

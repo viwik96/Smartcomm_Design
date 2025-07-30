@@ -454,7 +454,7 @@ class warnings:
         switch_option = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Switch']")))
         actions.move_to_element(switch_option).click().perform()
         switch_canvas = self.driver.find_element(By.ID, "LK_Switch")
-        actions.move_to_element_with_offset(switch_canvas, 500, 50).click().perform()
+        actions.move_to_element_with_offset(switch_canvas, 500, 200).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -463,7 +463,7 @@ class warnings:
         dist_busbar_option = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Distribution Busbar']")))
         actions.move_to_element(dist_busbar_option).click().perform()
         dist_canvas = self.driver.find_element(By.ID, "LK_DistributionBusbar")
-        actions.move_to_element_with_offset(dist_canvas, 550, 280).click().perform()
+        actions.move_to_element_with_offset(dist_canvas, 500, 300).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -473,7 +473,7 @@ class warnings:
         generic_load = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']")))
         actions.move_to_element(generic_load).click().perform()
         load_canvas = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(load_canvas, 600, 300).click().perform()
+        actions.move_to_element_with_offset(load_canvas, 600, 170).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(5)
 

@@ -145,3 +145,10 @@ class Common_methods:
         actions = ActionChains(self.driver)
         actions.move_to_element(dropdown_option).click().perform()
         time.sleep(3)
+
+    def settingpopup(self):
+
+        parent = self.driver.find_element(By.CSS_SELECTOR, "body > modal-container > div.logout-modal.modal-dialog.modal-dialog-centered > div")   
+        accept= parent.find_element(By.CSS_SELECTOR, "#delete")
+        accept.click()
+        time.sleep(3)

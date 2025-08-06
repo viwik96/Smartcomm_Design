@@ -40,7 +40,6 @@ class warnings:
         layout.click()
         time.sleep(4)
 
-
         # Hover on Distribution Busbar
         db_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(2) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(db_icon).perform()
@@ -58,7 +57,6 @@ class warnings:
         time.sleep(1)
         layout.click()
         time.sleep(3)
-
 
         # Hover on Generic Load
         gl_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(5) > #navbarDropdownMenuLink > .theme-svg")))
@@ -215,13 +213,11 @@ class warnings:
         lv_image = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#LV_Substation")))
         actions.click(lv_image).perform()
 
-
         # Click on parent layout
         layout = self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout")))
         pyautogui.moveTo(400, 190)
         layout.click()
         time.sleep(4)
-
 
         # Hover on Distribution Busbar
         db_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(2) > #navbarDropdownMenuLink > .theme-svg")))
@@ -240,7 +236,6 @@ class warnings:
         time.sleep(1)
         layout.click()
         time.sleep(3)
-
 
         # Hover on Generic Load
         gl_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(5) > #navbarDropdownMenuLink > .theme-svg")))
@@ -277,13 +272,11 @@ class warnings:
         lv_image = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#LV_Substation")))
         actions.click(lv_image).perform()
 
-
         # Click on parent layout
         layout = self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout")))
         pyautogui.moveTo(400, 190)
         layout.click()
         time.sleep(4)
-
 
         # Hover on Distribution Busbar
         db_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(2) > #navbarDropdownMenuLink > .theme-svg")))
@@ -388,7 +381,6 @@ class warnings:
         self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout"))).click()
         time.sleep(5)
 
-
     def switch1(self):
        
         actions = ActionChains(self.driver)
@@ -487,11 +479,9 @@ class warnings:
         time.sleep(4)
 
         # Verify 'LV Substation' visible
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
-
-        # Click on parent layout
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
-        time.sleep(4)
 
         # Step 2: Hover on 'Distribution Busbar' icon
         dist_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(2) > #navbarDropdownMenuLink > .theme-svg")))
@@ -505,8 +495,6 @@ class warnings:
         canvas_busbar = self.wait.until(EC.visibility_of_element_located((By.ID, "LK_DistributionBusbar")))
         actions.move_to_element_with_offset(canvas_busbar, 420, 195).click().perform()
         time.sleep(3)
-
-        # Click on parent layout
         self.driver.find_element(By.ID, "parent-layout").click()
 
         # Step 3: Hover on 'Motor Load' icon
@@ -520,7 +508,7 @@ class warnings:
 
         # Move to position and click on canvas
         canvas_motor = self.wait.until(EC.visibility_of_element_located((By.ID, "LK_MotorLoad")))
-        actions.move_to_element_with_offset(canvas_motor, 220, 200).click().perform()
+        actions.move_to_element_with_offset(canvas_motor, 550, 95).click().perform()
 
         # Click on parent layout
         self.driver.find_element(By.ID, "parent-layout").click()
@@ -603,7 +591,9 @@ class warnings:
         lv_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(lv_icon).perform()
         time.sleep(4)
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        # Verify 'LV Substation' visible
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(4)
 
@@ -624,7 +614,7 @@ class warnings:
         generic_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']")))
         actions.move_to_element(generic_span).click().perform()
         canvas_generic = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(canvas_generic, 210, 205).click().perform()
+        actions.move_to_element_with_offset(canvas_generic, 330, 55).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
 
         # 4. Coupling Switch
@@ -634,7 +624,7 @@ class warnings:
         coupling_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Coupling Switch']")))
         actions.move_to_element(coupling_span).click().perform()
         canvas_coupling = self.driver.find_element(By.ID, "LK_Coupling_Switch")
-        actions.move_to_element_with_offset(canvas_coupling, 562, 170).click().perform()
+        actions.move_to_element_with_offset(canvas_coupling, 550, 200).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
 
         # 5. Second Distribution Busbar
@@ -642,7 +632,7 @@ class warnings:
         dist_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Distribution Busbar']")))
         actions.move_to_element(dist_span).click().perform()
         canvas_busbar = self.driver.find_element(By.ID, "LK_DistributionBusbar")
-        actions.move_to_element_with_offset(canvas_busbar, 810, 195).click().perform()
+        actions.move_to_element_with_offset(canvas_busbar, 750, 195).click().perform()
         time.sleep(3)
         self.driver.find_element(By.ID, "parent-layout").click()
 
@@ -652,15 +642,15 @@ class warnings:
         generic_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']")))
         actions.move_to_element(generic_span).click().perform()
         canvas_generic = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(canvas_generic, 850, 205).click().perform()
+        actions.move_to_element_with_offset(canvas_generic, 850, 95).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
 
         # 7. Final LV Substation Move
         actions.move_to_element(lv_icon).perform()
         time.sleep(4)
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
-        canvas_lv = self.driver.find_element(By.ID, "LV_Substation")
-        actions.move_to_element_with_offset(canvas_lv, 750, 170).click().perform()
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
+        actions.move_to_element_with_offset(lvsubstation, 1000, 200).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(10)
 
@@ -672,7 +662,8 @@ class warnings:
         lv_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(lv_icon).perform()
         time.sleep(4)
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(4)
 
@@ -693,7 +684,7 @@ class warnings:
         generic_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']")))
         actions.move_to_element(generic_span).click().perform()
         canvas_generic = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(canvas_generic, 220, 200).click().perform()
+        actions.move_to_element_with_offset(canvas_generic, 330, 55).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
 
         # 4. Active Harmonic Filter
@@ -703,7 +694,7 @@ class warnings:
         ahf_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Active Harmonic Filter']")))
         actions.move_to_element(ahf_span).click().perform()
         canvas_ahf = self.driver.find_element(By.ID, "LK_AHF")
-        actions.move_to_element_with_offset(canvas_ahf, 430, 160).click().perform()
+        actions.move_to_element_with_offset(canvas_ahf, 500, 95).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(5)
 
@@ -714,7 +705,8 @@ class warnings:
         # 1. LV Substation Hover + Click
         lv_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(lv_icon).perform()
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(4)
 
@@ -731,15 +723,15 @@ class warnings:
 
         # 3. Double-click Busbar Connector
         busbar_connector = self.driver.find_element(By.ID, "busbar-connector-2-2")
-        actions.move_to_element_with_offset(busbar_connector, 430, 160).double_click().perform()
+        actions.move_to_element(busbar_connector).double_click().perform()
 
         # 4. LV Substation (again)
         lv_icon_2 = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(lv_icon_2).perform()
         time.sleep(4)
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
-        lv_canvas = self.driver.find_element(By.ID, "LV_Substation")
-        actions.move_to_element_with_offset(lv_canvas, 600, 250).click().perform()
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
+        actions.move_to_element_with_offset(lvsubstation, 900, 220).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(4)
 
@@ -750,7 +742,7 @@ class warnings:
         generic_span = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']")))
         actions.move_to_element(generic_span).click().perform()
         canvas_generic = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(canvas_generic, 220, 200).click().perform()
+        actions.move_to_element_with_offset(canvas_generic, 330, 55).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(8)
 
@@ -761,7 +753,8 @@ class warnings:
         # 1. Hover on LV Substation and click on canvas
         lv_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(lv_icon).perform()
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(4)
 
@@ -780,7 +773,7 @@ class warnings:
         time.sleep(2)
         self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']"))).click()
         canvas_generic = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(canvas_generic, 220, 200).click().perform()
+        actions.move_to_element_with_offset(canvas_generic, 330, 60).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -791,7 +784,8 @@ class warnings:
         # Step 1: LV Substation
         lv_icon = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ":nth-child(1) > #navbarDropdownMenuLink > .theme-svg")))
         actions.move_to_element(lv_icon).perform()
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        lvsubstation = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='LV Substation']")))
+        actions.move_to_element(lvsubstation).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(4)
 
@@ -810,7 +804,7 @@ class warnings:
         time.sleep(2)
         self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']"))).click()
         generic_canvas = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(generic_canvas, 220, 200).click().perform()
+        actions.move_to_element_with_offset(generic_canvas, 320, 90).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
 
         # Step 4: Capacitor Bank
@@ -819,7 +813,7 @@ class warnings:
         time.sleep(2)
         self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Capacitor Bank']"))).click()
         capacitor_canvas = self.driver.find_element(By.ID, "LK_Capacitor_Bank")
-        actions.move_to_element_with_offset(capacitor_canvas, 460, 190).click().perform()
+        actions.move_to_element_with_offset(capacitor_canvas, 500, 95).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(5)
 
@@ -840,7 +834,7 @@ class warnings:
         actions.move_to_element(dist_icon).perform()
         self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Distribution Busbar']"))).click()
         dist_canvas = self.driver.find_element(By.ID, "LK_DistributionBusbar")
-        actions.move_to_element_with_offset(dist_canvas, 420, 195).click().perform()
+        actions.move_to_element_with_offset(dist_canvas, 450, 120).click().perform()
         time.sleep(3)
         self.driver.find_element(By.ID, "parent-layout").click()
 
@@ -850,7 +844,7 @@ class warnings:
         time.sleep(2)
         self.wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()='Generic Load']"))).click()
         generic_canvas = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(generic_canvas, 220, 200).click().perform()
+        actions.move_to_element_with_offset(generic_canvas, 370, 10).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -874,7 +868,7 @@ class warnings:
         self.wait.until(EC.visibility_of_element_located(
             (By.XPATH, "//span[text()='Distribution Busbar']"))).click()
         dist_canvas = self.driver.find_element(By.ID, "LK_DistributionBusbar")
-        actions.move_to_element_with_offset(dist_canvas, 420, 195).click().perform()
+        actions.move_to_element_with_offset(dist_canvas, 450, 50).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -886,7 +880,7 @@ class warnings:
         self.wait.until(EC.visibility_of_element_located(
             (By.XPATH, "//span[text()='Generic Load']"))).click()
         generic_canvas = self.driver.find_element(By.ID, "LK_GenericLoad")
-        actions.move_to_element_with_offset(generic_canvas, 220, 200).click().perform()
+        actions.move_to_element_with_offset(generic_canvas, 550, -50).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -910,7 +904,7 @@ class warnings:
         self.wait.until(EC.visibility_of_element_located(
             (By.XPATH, "//span[text()='Distribution Busbar']"))).click()
         dist_canvas = self.driver.find_element(By.ID, "LK_DistributionBusbar")
-        actions.move_to_element_with_offset(dist_canvas, 420, 195).click().perform()
+        actions.move_to_element_with_offset(dist_canvas, 450, 50).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -934,7 +928,7 @@ class warnings:
         self.wait.until(EC.visibility_of_element_located(
             (By.XPATH, "//span[text()='Distribution Busbar']"))).click()
         dist_canvas = self.driver.find_element(By.ID, "LK_DistributionBusbar")
-        actions.move_to_element_with_offset(dist_canvas, 420, 195).click().perform()
+        actions.move_to_element_with_offset(dist_canvas, 450, 50).click().perform()
         self.driver.find_element(By.ID, "parent-layout").click()
         time.sleep(3)
 
@@ -945,6 +939,6 @@ class warnings:
         self.wait.until(EC.visibility_of_element_located(
             (By.XPATH, "//span[text()='Circuit Breaker']"))).click()
         cb_canvas = self.driver.find_element(By.ID, "LK_CircuitBreaker")
-        actions.move_to_element_with_offset(cb_canvas, 220, 200).click().perform()
+        actions.move_to_element_with_offset(cb_canvas, 550, -50).click().perform()
         time.sleep(2)
         self.driver.find_element(By.ID, "parent-layout").click()

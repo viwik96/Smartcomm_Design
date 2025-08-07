@@ -3529,9 +3529,406 @@ class Test_sldscreenpage:
         finally:
                 comm.logo()
 
+
+    def test_warning_tc_57(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+                Warning.sld_framed_component()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "lv-source-1-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "un")).select_by_index(9)
+                time.sleep(2)
+
+                self.driver.find_element(By.ID, "generic-load-3-label-3").click()
+                rcdbutton = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#offcanvas_accordion > div > h2 > button > app-toggle-input > div > div > label")))
+                rcdbutton.click()
+                time.sleep(2)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10)             
+
+                # Step 7: Click the View Report button
+                self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
+
+                # Step 8: Capture and validate warning message
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "#panelsStayOpen-errorOne-1 > div > div > div:nth-child(3) > span"))
+                )
+                actual_message = warning_element.text.strip()
+                expected_message = (
+                "RCD is not available with Rated Voltage >= 415, Please contact the customer interaction centre"
+                )
+
+                assert actual_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{actual_message}'"
+                print("Warning-TC-57 passed: Circuit breaker combination warning verified.")
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_57_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+
+    def test_warning_tc_58(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+                Warning.motor1()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(2)
+                time.sleep(2)
+
+                self.driver.find_element(By.ID, "motor-load-3-label-5").click()
+                Select(self.driver.find_element(By.ID, "ek")).select_by_index(1)
+                time.sleep(2)
+
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+                Select(self.driver.find_element(By.ID, "op")).select_by_index(41)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10)             
+
+                # Step 7: Click the View Report button
+                self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
+
+                # Step 8: Capture and validate warning message
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "#panelsStayOpen-errorOne-2 > div > div > div:nth-child(3) > span"))
+                )
+                actual_message = warning_element.text.strip()
+                expected_message = (
+                "VFD is available with LCD Keypad. Pl. choose LCD from 'External Keypad Type' or contact the customer interaction centre"
+                )
+
+                assert actual_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{actual_message}'"
+                print("Warning-TC-58 passed: Circuit breaker combination warning verified.")
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_58_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+
+    def test_warning_tc_59(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+                Warning.motor1()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(2)
+                time.sleep(2)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10) 
+
+                self.driver.find_element(By.ID, "motor-load-3-label-5").click()
+                time.sleep(2)
+                self.driver.find_element(By.CSS_SELECTOR, "img[alt='Lock/Un-Lock']").click()
+
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+                Select(self.driver.find_element(By.ID, "op")).select_by_index(41)            
+
+                # Step 7: Click the View Report button
+                self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
+
+                # Step 8: Capture and validate warning message
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "#panelsStayOpen-errorOne-2 > div > div > div:nth-child(3) > span"))
+                )
+                actual_message = warning_element.text.strip()
+                expected_message = (
+                "VFD TA 3 (4 A) rating is insufficient for Motor full load current (615 A). Please unlock VFD"
+                )
+
+                assert actual_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{actual_message}'"
+                print("Warning-TC-59 passed: Circuit breaker combination warning verified.")
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_59_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+    
+    def test_warning_tc_60(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+                Warning.motor1()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(2)
+                time.sleep(2)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10) 
+
+                self.driver.find_element(By.ID, "motor-load-3-label-5").click()
+                time.sleep(2)
+                self.driver.find_element(By.CSS_SELECTOR, "img[alt='Lock/Un-Lock']").click()
+
+                Select(self.driver.find_element(By.ID, "vfd-application")).select_by_index(1)       
+
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "app-alerts > div > div > div.ms-3.ng-star-inserted > span.fw-normal.d-block")))     
+
+                warning_message = warning_element.text.strip()
+
+                print("Captured Warning Message:", warning_message)
+
+                expected_message = "VFD will be unlocked on changing the application, simulate again"
+                
+                assert warning_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{warning_message}'"
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_60_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+
+    def test_warning_tc_61(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+
+                self.driver.find_element(By.ID, "settings-tab").click()
+                ambient = self.driver.find_element(By.ID, "generalAmbientTempAir")
+                ambient.clear()
+                ambient.clear()
+                ambient.send_keys("60")
+                time.sleep(1)
+
+                setting_savebutton = self.driver.find_element(By.ID, "saveSettings")
+                setting_savebutton.click()
+
+                Warning.motor1()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(3)
+                time.sleep(2)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10)             
+
+                # Step 7: Click the View Report button
+                self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
+
+                # Step 8: Capture and validate warning message
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "#panelsStayOpen-errorOne-1 > div > div > div:nth-child(3) > span"))
+                )
+                actual_message = warning_element.text.strip()
+                expected_message = (
+                "Soft starter is not available for Ambient Temperature greater than 60. Please contact the customer interaction centre"
+                )
+
+                assert actual_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{actual_message}'"
+                print("Warning-TC-61 passed: Circuit breaker combination warning verified.")
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_61_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+
+
+    def test_warning_tc_62(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+
+                self.driver.find_element(By.ID, "settings-tab").click()
+                ambient = self.driver.find_element(By.ID, "generalAmbientTempAir")
+                ambient.clear()
+                ambient.clear()
+                ambient.send_keys("50")
+                time.sleep(1)
+
+                setting_savebutton = self.driver.find_element(By.ID, "saveSettings")
+                setting_savebutton.click()
+
+                Warning.motor1()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(3)
+                time.sleep(2)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10)                            
+
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+                self.driver.find_element(By.CSS_SELECTOR, "img[alt='Lock/Un-Lock']").click() 
+
+                self.driver.find_element(By.ID, "motor-load-3-label-6").click()
+                time.sleep(2)
+                Select(self.driver.find_element(By.ID, "op")).select_by_index(41) 
+
+                # Step 7: Click the View Report button
+                self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
+
+                # Step 8: Capture and validate warning message
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "#panelsStayOpen-errorOne-1 > div > div > div:nth-child(3) > span"))
+                )
+                actual_message = warning_element.text.strip()
+                expected_message = (
+                "Soft Starter ST 3 (16 A) rating is insufficient for Motor full load current (615 A). Please unlock Soft Starter"
+                )
+
+                assert actual_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{actual_message}'"
+                print("Warning-TC-62 passed: Circuit breaker combination warning verified.")
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_62_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+
+    def test_warning_tc_63(self):
+
+        comm = Common_methods(self.driver)
+        Warning = warnings(self.driver)
+       
+        try:
+                # Step 1: Setup framed component via helper function
+                comm.test_proclick()
+                Warning.motor1()              
+
+                # Step 2: Click on the component
+                self.driver.find_element(By.ID, "parent-layout")
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+
+                Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(3)
+                time.sleep(2)
+
+                # Step 5: Click the close or collapse image
+                self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+
+                self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+                time.sleep(10)                            
+
+                self.driver.find_element(By.ID, "motor-load-3-label-1").click()
+                time.sleep(2)
+                Select(self.driver.find_element(By.CSS_SELECTOR, "ss-application")).select_by_index(1)
+
+
+                warning_element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located((By.CSS_SELECTOR, "app-alerts > div > div > div.ms-3.ng-star-inserted > span.fw-normal.d-block")))     
+
+                warning_message = warning_element.text.strip()
+
+                print("Captured Warning Message:", warning_message)
+
+                expected_message = "Soft starter is not suitable for the selected application. Please unlock the Soft starter"
+                
+                assert warning_message == expected_message, f"Mismatch: Expected '{expected_message}', but got '{warning_message}'"
+
+        except Exception as e:
+                print(f"[ERROR] Test failed due to: {e}")
+                self.driver.save_screenshot("warning_tc_60_failure.png")
+                raise
+
+        finally:
+                comm.logo()
+
+                
+
+
     
 
 
+    
 
     
     

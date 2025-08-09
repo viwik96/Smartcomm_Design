@@ -274,7 +274,7 @@ class warnings:
 
         # Click on parent layout
         layout = self.wait.until(EC.element_to_be_clickable((By.ID, "parent-layout")))
-        pyautogui.moveTo(400, 190)
+        pyautogui.moveTo(200, 250)
         layout.click()
         time.sleep(4)
 
@@ -310,7 +310,7 @@ class warnings:
         actions.click(gl_image).perform()
 
         # Move Generic Load to (215, 200) using pyautogui
-        pyautogui.moveTo(215, 200)
+        pyautogui.moveTo(250, 200)
         time.sleep(1)
         layout.click()
 

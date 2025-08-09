@@ -29,41 +29,72 @@ class Test_sldscreenpage:
             signin.get_started()
             time.sleep(40)  
     
-    def test_warning_tc_30(self):
-        
+    def test_warning_tc_27(self):
+
         comm = Common_methods(self.driver)
         warning = warnings(self.driver)
 
         try:
-            # Step 1: Navigate to Earthing System page
+            # Step 1: Navigate to Motor1 screen
             comm.test_sample1()
             comm.test_proclick()
-            warning.earthingsys2()
+            warning.motor1()
 
-            # Step 2: Click gear icon and Calculate button
+            parent = self.driver.find_element(By.ID, "parent-layout")
+            # Step 2: Select Motor Load 3 label 1
+            motor1_label = parent.find_element(By.ID, "motor-load-3-label-1")
+            ActionChains(self.driver).move_to_element(motor1_label).click().perform()
+
+            # Step 3: Select starter type (index 2)
+            Select(self.driver.find_element(By.ID, "starter-type")).select_by_index(2)
+            time.sleep(2)
+
+            # Step 4: Click Motor Load 3 label 5
+            motor5_label = parent.find_element(By.ID, "motor-load-3-label-5")
+            ActionChains(self.driver).move_to_element(motor5_label).click().perform()
+
+            # Step 5: Select External Keypad (index 1)
+            Select(self.driver.find_element(By.ID, "ek")).select_by_index(1)
+            time.sleep(2)
+
+            # Step 6: Click gear icon and calculate
+            self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
             self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
-            time.sleep(5)
+            time.sleep(6)
 
-            # Step 3: Click Report button
+            # Step 7: Select Motor Load 3 label 1 again
+            motor1_label = parent.find_element(By.ID, "motor-load-3-label-1")
+            ActionChains(self.driver).move_to_element(motor1_label).click().perform()
+
+            # Step 8: Select operation mode (index 36)
+            Select(self.driver.find_element(By.ID, "op")).select_by_index(36)
+            time.sleep(2)
+
+            # Step 9: Click gear icon and calculate again
+            self.driver.find_element(By.CSS_SELECTOR, ".justify-content-between > .border-0 > img").click()
+            self.driver.find_element(By.CSS_SELECTOR, ".pt-4 > div > .btn").click()
+            time.sleep(10)
+
+            # Step 10: Open report
             self.driver.find_element(By.CSS_SELECTOR, ".report-card > .row > .col-12 > .btn").click()
 
-            # Step 4: Validate error message
-            error_element = WebDriverWait(self.driver, 10).until(
+            # Step 11: Validate warning message
+            error_elem = WebDriverWait(self.driver, 10).until(
                 EC.visibility_of_element_located(
-                    (By.CSS_SELECTOR, "#panelsStayOpen-errorOne-0 > .accordion-body > .fs-14 > :nth-child(3) > .fs-12")
+                    (By.CSS_SELECTOR, "#panelsStayOpen-errorOne-1 > .accordion-body > .fs-14 > :nth-child(3) > .fs-12")
                 )
             )
-            actual_msg = error_element.text.strip()
-            expected_msg = "The component LV CB QA 3 is never closed, try adding scenario."
+            actual_msg = error_elem.text.strip()
+            expected_msg = "VFD Cable is not available for undefined"
 
             print("Validation Message:", actual_msg)
             assert actual_msg == expected_msg, f"Expected: {expected_msg}, Got: {actual_msg}"
 
         except Exception as e:
-                
-                print(f"[Test Failed] Reason: {e}")
-                self.driver.save_screenshot("test_warning_tc_22_failed.png")
-                raise
+
+           print(f"[Test Failed] Reason: {e}")
+           self.driver.save_screenshot("test_warning_tc_22_failed.png")
+           raise
 
         finally:
             comm.logo()
